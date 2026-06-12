@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: socialsync-api
+    env: node
+    plan: free
+    buildCommand: npm install && cd apps/server && npx prisma generate && npx tsc
+    startCommand: cd apps/server && npx prisma db push && node dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "10000"
+      - key: FRONTEND_URL
+        value: "https://your-vercel-app-url.vercel.app"
+      - key: DATABASE_URL
+        value: "file:./dev.db"
+      - key: TWITTER_API_KEY
+        value: "placeholder"
+      - key: TWITTER_API_SECRET
+        value: "placeholder"
+      - key: TWITTER_BEARER_TOKEN
+        value: "placeholder"
+      - key: TWITTER_ACCESS_TOKEN
+        value: "placeholder"
+      - key: TWITTER_ACCESS_SECRET
+        value: "placeholder"
