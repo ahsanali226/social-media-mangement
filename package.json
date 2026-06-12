@@ -1,0 +1,24 @@
+{
+  "name": "socialsync",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "npm@10.0.0",
+  "description": "SocialSync — Unified Social Media Management Platform",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:server": "npm run dev --workspace=apps/server",
+    "db:push": "npm run db:push --workspace=apps/server",
+    "db:generate": "npm run db:generate --workspace=apps/server"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.0"
+  }
+}
