@@ -4,11 +4,20 @@ import { PostService } from './post.service';
 export class ScheduleService {
   private static intervalId: NodeJS.Timeout | null = null;
 
-  static start(intervalMs: number = 60000) {
+  static async start(intervalMs: number = 60000) {
     if (this.intervalId) return;
 
     console.log('⏰ Scheduler service started. Checking for scheduled posts every minute...');
     
+    // Verify database connection before starting
+    try {
+      await prisma.$queryRaw`SELECT 1`;
+      console.log('✅ Database connection verified');
+    } catch (error) {
+      console.error('❌ Database connection failed:', error);
+      throw new Error('Failed to connect to database');
+    }
+
     // Run an initial check immediately
     this.checkAndPublishScheduledPosts().catch((error) => {
       console.error('Initial scheduler check failed:', error);
