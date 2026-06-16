@@ -14,8 +14,15 @@ const app = express();
 
 // ── Middleware ────────────────────────────
 app.use(helmet());
+let safeOrigin = '*';
+try {
+  safeOrigin = new URL(env.FRONTEND_URL.trim()).origin;
+} catch (e) {
+  console.warn('Invalid FRONTEND_URL format, falling back to * for CORS');
+}
+
 app.use(cors({
-  origin: env.FRONTEND_URL.trim(),
+  origin: safeOrigin,
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
