@@ -4,6 +4,7 @@
     ".env"
   ],
   "globalEnv": [
+    "NEXT_PUBLIC_API_URL",
     "DATABASE_URL",
     "FRONTEND_URL",
     "JWT_SECRET",
