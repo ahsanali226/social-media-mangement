@@ -22,6 +22,22 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// ── Root Route ───────────────────────────
+app.get('/', (_req, res) => {
+  res.json({
+    success: true,
+    message: 'SocialSync API is running',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      auth: '/api/auth',
+      posts: '/api/posts',
+      ai: '/api/ai',
+      platforms: '/api/platforms',
+    },
+  });
+});
+
 // ── Health Check ─────────────────────────
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
