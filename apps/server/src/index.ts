@@ -79,7 +79,7 @@ app.listen(PORT, async () => {
   ║   Environment: ${process.env.NODE_ENV || 'production'}            ║
   ╚══════════════════════════════════════════╝
   `);
-  
+
   // Start scheduled post polling service after server is ready
   try {
     ScheduleService.start();

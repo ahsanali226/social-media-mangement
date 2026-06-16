@@ -13,7 +13,7 @@ services:
       - key: FRONTEND_URL
         value: "https://your-vercel-app-url.vercel.app"
       - key: DATABASE_URL
-        value: "file:./dev.db"
+        value: "postgresql://neondb_owner:npg_hdQxtr5C2XvE@ep-nameless-haze-aize7w4p-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
       - key: TWITTER_API_KEY
         value: "placeholder"
       - key: TWITTER_API_SECRET

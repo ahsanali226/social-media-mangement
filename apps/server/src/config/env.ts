@@ -6,7 +6,7 @@ dotenv.config();
 
 // Fallbacks for critical missing/empty env variables to prevent crash on startup (e.g. on Vercel)
 const fallbackEnv = {
-  DATABASE_URL: process.env.DATABASE_URL || 'file:./dev.db',
+  DATABASE_URL: process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_hdQxtr5C2XvE@ep-nameless-haze-aize7w4p-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
   JWT_SECRET: process.env.JWT_SECRET || 'default-jwt-secret-key-change-me-in-production',
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || 'default-jwt-refresh-secret-key-change-me-in-production',
 };
