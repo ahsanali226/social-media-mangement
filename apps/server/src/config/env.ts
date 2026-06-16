@@ -31,7 +31,7 @@ process.env.JWT_REFRESH_SECRET = fallbackEnv.JWT_REFRESH_SECRET;
 
 const envSchema = z.object({
   PORT: z.string().default('4000'),
-  FRONTEND_URL: z.string().default('http://localhost:3000'),
+  FRONTEND_URL: z.string().default('https://social-media-mangement-server-5uky.vercel.app'),
   DATABASE_URL: z.string().min(1, 'DATABASE_URL is required'),
   JWT_SECRET: z.string().min(10, 'JWT_SECRET must be at least 10 characters'),
   JWT_REFRESH_SECRET: z.string().min(10, 'JWT_REFRESH_SECRET must be at least 10 characters'),
