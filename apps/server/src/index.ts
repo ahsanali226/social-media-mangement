@@ -55,18 +55,21 @@ app.use(errorHandler);
 // ── Start Server ─────────────────────────
 const PORT = parseInt(env.PORT, 10);
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`
   ╔══════════════════════════════════════════╗
   ║   🚀 SocialSync API Server              ║
   ║   Running on http://localhost:${PORT}       ║
-  ║   Environment: ${process.env.NODE_ENV || 'development'}            ║
+  ║   Environment: ${process.env.NODE_ENV || 'production'}            ║
   ╚══════════════════════════════════════════╝
   `);
   
-  // Start scheduled post polling service
-  ScheduleService.start();
+  // Start scheduled post polling service after server is ready
+  try {
+    ScheduleService.start();
+  } catch (error) {
+    console.error('❌ Failed to start scheduler:', error);
+  }
 });
 
 export default app;
-
