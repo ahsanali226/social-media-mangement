@@ -1,6 +1,8 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": [".env"],
+  "globalDependencies": [
+    ".env"
+  ],
   "globalEnv": [
     "DATABASE_URL",
     "FRONTEND_URL",
@@ -27,8 +29,13 @@
       "persistent": true
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "dist/**"
+      ]
     },
     "lint": {},
     "typecheck": {}

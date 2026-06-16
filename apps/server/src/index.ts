@@ -15,7 +15,7 @@ const app = express();
 // ── Middleware ────────────────────────────
 app.use(helmet());
 app.use(cors({
-  origin: env.FRONTEND_URL,
+  origin: env.FRONTEND_URL.trim(),
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
