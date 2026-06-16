@@ -26,7 +26,9 @@ const envSchema = z.object({
   NODE_ENV: z.string().default('production'),
 });
 
-let env;
+type Env = z.infer<typeof envSchema>;
+
+let env: Env;
 try {
   env = envSchema.parse(process.env);
 } catch (error) {
@@ -35,3 +37,4 @@ try {
 }
 
 export { env };
+export type { Env };
