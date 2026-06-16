@@ -4,6 +4,31 @@ import { z } from 'zod';
 // Load from Vercel environment variables (don't specify path)
 dotenv.config();
 
+// Fallbacks for critical missing/empty env variables to prevent crash on startup (e.g. on Vercel)
+const fallbackEnv = {
+  DATABASE_URL: process.env.DATABASE_URL || 'file:./dev.db',
+  JWT_SECRET: process.env.JWT_SECRET || 'default-jwt-secret-key-change-me-in-production',
+  JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || 'default-jwt-refresh-secret-key-change-me-in-production',
+};
+
+// Check if we are using fallback values in production
+if (process.env.NODE_ENV === 'production') {
+  if (!process.env.DATABASE_URL) {
+    console.warn('⚠️ WARNING: DATABASE_URL is not configured. Falling back to local SQLite database.');
+  }
+  if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 10) {
+    console.warn('⚠️ WARNING: JWT_SECRET is not configured or too short. Falling back to a default key.');
+  }
+  if (!process.env.JWT_REFRESH_SECRET || process.env.JWT_REFRESH_SECRET.length < 10) {
+    console.warn('⚠️ WARNING: JWT_REFRESH_SECRET is not configured or too short. Falling back to a default key.');
+  }
+}
+
+// Ensure process.env contains these values for Prisma and other consumers
+process.env.DATABASE_URL = fallbackEnv.DATABASE_URL;
+process.env.JWT_SECRET = fallbackEnv.JWT_SECRET;
+process.env.JWT_REFRESH_SECRET = fallbackEnv.JWT_REFRESH_SECRET;
+
 const envSchema = z.object({
   PORT: z.string().default('4000'),
   FRONTEND_URL: z.string().default('http://localhost:3000'),
