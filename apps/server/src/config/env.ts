@@ -26,9 +26,12 @@ const envSchema = z.object({
   NODE_ENV: z.string().default('production'),
 });
 
+let env;
 try {
-  export const env = envSchema.parse(process.env);
+  env = envSchema.parse(process.env);
 } catch (error) {
   console.error('Environment validation failed:', error);
   process.exit(1);
 }
+
+export { env };
